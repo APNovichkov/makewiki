@@ -1,28 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from wiki.models import Page
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
 
 class PageList(ListView):
-    """
-    CHALLENGES:
-      1. On GET, display a homepage that shows all Pages in your wiki.
-      2. Replace this CHALLENGE text with a descriptive docstring for PageList.
-      3. Replace pass below with the code to render a template named `list.html`.
-    """
+    """Class Based view that extends from ListView and returns a list of all pages."""
+
     model = Page
+    template = "templates/list.html"
+    context_object_name = "all_pages_list"
 
-    def get(self, request):
-        """ Returns a list of wiki pages. """
-        pass
-
+    def get_queryset(self):
+        return Page.objects.all()
 
 class PageDetailView(DetailView):
     """
-    CHALLENGES:
-      1. On GET, render a template named `page.html`.
-      2. Replace this docstring with a description of what thos accomplishes.
+    Show page.html template on GET given a slug.
 
     STRETCH CHALLENGES:
       1. Import the PageForm class from forms.py.
@@ -35,11 +29,14 @@ class PageDetailView(DetailView):
       5. After successfully editing a Page, use Django Messages to "flash" the user a success message
            - Message Content: REPLACE_WITH_PAGE_TITLE has been successfully updated.
     """
+
     model = Page
 
     def get(self, request, slug):
-        """ Returns a specific of wiki page by slug. """
-        pass
+        """Return a specific of wiki page by slug."""
+
+        page = get_object_or_404(Page, slug=slug)
+        return render(request, "wiki/page.html", {'page': page})
 
     def post(self, request, slug):
         pass
