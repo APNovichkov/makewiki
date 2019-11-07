@@ -8,7 +8,7 @@ class PageList(ListView):
     """Class Based view that extends from ListView and returns a list of all pages."""
 
     model = Page
-    template = "templates/list.html"
+    template = "templates/base.html"
     context_object_name = "all_pages_list"
 
     def get_queryset(self):
