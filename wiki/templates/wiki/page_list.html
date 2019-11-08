@@ -1,7 +1,7 @@
 <h1> Hello World</h1>
 
 <ul>
-{% for page in all_pages_list %}
-    <li>{{page.slug}}</li>
+{% for page in pages %}
+    <li><a href="{{page.slug}}">{{page.slug}}</li>
 {% endfor %}
 </ul>

@@ -31,12 +31,8 @@ class PageDetailView(DetailView):
     """
 
     model = Page
-
-    def get(self, request, slug):
-        """Return a specific of wiki page by slug."""
-
-        page = get_object_or_404(Page, slug=slug)
-        return render(request, "templates/base.html", {'page': page})
+    template_name = "wiki/page.html"
+    context_object_name = "page"
 
     def post(self, request, slug):
         pass
