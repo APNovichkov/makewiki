@@ -8,11 +8,11 @@ class PageList(ListView):
     """Class Based view that extends from ListView and returns a list of all pages."""
 
     model = Page
-    template = "templates/base.html"
+    template_name = "wiki/page_list.html"
     context_object_name = "all_pages_list"
 
-    def get_queryset(self):
-        return Page.objects.all()
+    # def get_queryset(self):
+    #     return Page.objects.all()
 
 class PageDetailView(DetailView):
     """
@@ -36,7 +36,7 @@ class PageDetailView(DetailView):
         """Return a specific of wiki page by slug."""
 
         page = get_object_or_404(Page, slug=slug)
-        return render(request, "wiki/page.html", {'page': page})
+        return render(request, "templates/base.html", {'page': page})
 
     def post(self, request, slug):
         pass
